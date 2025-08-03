@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [frmData, setFrmData] = useState({});
+  
+ const handleInput=(e)=>{
+        const {name,value}=e.target;
+        setFrmData({...frmData,[name]:value})
+ }
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Logging in with:', { email, password });
+    
   };
 
   return (
@@ -20,8 +25,8 @@ const Login = () => {
             <input
               type="email"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              onChange={handleInput}
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
               placeholder="you@example.com"
             />
@@ -32,8 +37,8 @@ const Login = () => {
             <input
               type="password"
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              onChange={handleInput}
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
               placeholder="••••••••"
             />
@@ -48,7 +53,7 @@ const Login = () => {
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-4">
-          Don't have an account? <a href="#" className="text-red-500 hover:underline">Register</a>
+          Don't have an account? <Link to="/register" className="text-red-500 hover:underline">Create Account</Link>
         </p>
       </div>
     </div>
