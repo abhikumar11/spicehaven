@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../redux/action';
+import { useEffect } from 'react';
 
 const Login = () => {
+  const {user}=useSelector((state)=>state.auth);
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   const [frmData, setFrmData] = useState({});
   
+   useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
  const handleInput=(e)=>{
         const {name,value}=e.target;
         setFrmData({...frmData,[name]:value})
@@ -11,7 +22,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
+    dispatch(loginUser(frmData));
   };
 
   return (
