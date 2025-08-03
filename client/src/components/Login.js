@@ -4,9 +4,8 @@ import { loginUser } from "../redux/action";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const {user}=useSelector((state)=>state.auth)
-  const [form, setForm] = useState({ email: "", password: "", role: "customer"});
-  const [activeRole, setActiveRole] = useState("customer");
+  const { user } = useSelector((state) => state.auth);
+  const [form, setForm] = useState({ email: "", password: "", role: "customer" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -14,59 +13,20 @@ const Login = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRoleSwitch = (role) => {
-    setActiveRole(role);
-    setForm({ ...form, role });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginUser(form, navigate));
   };
-  
+
   useEffect(() => {
     if (user) {
-      
-      if (user.role === "customer") {
-        navigate("/");
-      } else if (user.role === "owner") {
-        navigate("/owner/dashboard");
-      }
+      navigate("/");
     }
   }, [user, navigate]);
 
   return (
-    <div className="login-container" style={{ maxWidth: 400, margin: "auto" }}>
-      <h2>Login</h2>
-      <div style={{ display: "flex", marginBottom: 16 }}>
-        <button
-          type="button"
-          onClick={() => handleRoleSwitch("customer")}
-          style={{
-            flex: 1,
-            padding: 10,
-            background: activeRole === "customer" ? "#27548A" : "#ccc",
-            color: activeRole === "customer" ? "#fff" : "#000",
-            border: "none"
-          }}
-        >
-          Customer
-        </button>
-        <button
-          type="button"
-          onClick={() => handleRoleSwitch("owner")}
-          style={{
-            flex: 1,
-            padding: 10,
-            background: activeRole === "owner" ? "#27548A" : "#ccc",
-            color: activeRole === "owner" ? "#fff" : "#000",
-            border: "none"
-          }}
-        >
-          Restaurant Owner
-        </button>
-      </div>
-
+    <div className="login-container" style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
+      <h2 style={{ textAlign: "center", marginBottom: "1rem" }}>Login</h2>
       <form onSubmit={handleSubmit}>
         <input
           name="email"
@@ -74,7 +34,7 @@ const Login = () => {
           placeholder="Email"
           onChange={handleChange}
           required
-          style={{ width: "100%", marginBottom: 8, padding: 8 }}
+          style={{ width: "100%", marginBottom: 12, padding: 10, fontSize: 16 }}
         />
         <input
           name="password"
@@ -82,9 +42,20 @@ const Login = () => {
           placeholder="Password"
           onChange={handleChange}
           required
-          style={{ width: "100%", marginBottom: 16, padding: 8 }}
+          style={{ width: "100%", marginBottom: 20, padding: 10, fontSize: 16 }}
         />
-        <button type="submit" style={{ width: "100%", padding: 10, background: "#27548A", color: "#fff" }}>
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: 12,
+            background: "#27548A",
+            color: "#fff",
+            fontSize: 16,
+            border: "none",
+            cursor: "pointer"
+          }}
+        >
           Login
         </button>
       </form>

@@ -1,93 +1,90 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../redux/action';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../redux/action";
 import { toast } from "react-toastify";
 
 const Register = () => {
-    const {loading,error}=useSelector((state)=>state.auth);
-     const [form, setForm] = useState({ name:"",email:"", password:"",role: "customer" });
-  const [activeRole, setActiveRole] = useState("customer");
+  const { loading, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-    const handleChange=(e)=>{
-        setForm({...form,[e.target.name]:e.target.value});
-    }
-     const handleRoleSwitch = (role) => {
-    setActiveRole(role);
-    setForm({ ...form, role });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
-    const handleSubmit=async(e)=>{
-        e.preventDefault();
-        await dispatch(registerUser(form));
-        toast.success("Registered successfully!");
-        navigate("/login");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await dispatch(registerUser(form));
+      toast.success("Registered successfully!");
+      navigate("/login");
+    } catch (err) {
+      toast.error("Registration failed");
     }
+  };
 
   return (
-    <div className="signup-container" style={{ maxWidth: 400, margin: "auto" }}>
-      <h2>Login</h2>
-      <div style={{ display: "flex", marginBottom: 16 }}>
-        <button
-          type="button"
-          onClick={() => handleRoleSwitch("customer")}
-          style={{
-            flex: 1,
-            padding: 10,
-            background: activeRole === "customer" ? "#27548A" : "#ccc",
-            color: activeRole === "customer" ? "#fff" : "#000",
-            border: "none"
-          }}
-        >
-          Customer
-        </button>
-        <button
-          type="button"
-          onClick={() => handleRoleSwitch("owner")}
-          style={{
-            flex: 1,
-            padding: 10,
-            background: activeRole === "owner" ? "#27548A" : "#ccc",
-            color: activeRole === "owner" ? "#fff" : "#000",
-            border: "none"
-          }}
-        >
-          Restaurant Owner
-        </button>
-      </div>
+    <div className="signup-container" style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
+      <h2 style={{ textAlign: "center", marginBottom: "1rem" }}>Register</h2>
 
       <form onSubmit={handleSubmit}>
-         <input
+        <input
           name="name"
           type="text"
           placeholder="Name"
           onChange={handleChange}
+          value={form.name}
           required
           style={{ width: "100%", marginBottom: 8, padding: 8 }}
         />
+
         <input
           name="email"
           type="email"
           placeholder="Email"
           onChange={handleChange}
+          value={form.email}
           required
           style={{ width: "100%", marginBottom: 8, padding: 8 }}
         />
+
         <input
           name="password"
           type="password"
           placeholder="Password"
           onChange={handleChange}
+          value={form.password}
           required
           style={{ width: "100%", marginBottom: 16, padding: 8 }}
         />
-        <button type="submit" style={{ width: "100%", padding: 10, background: "#27548A", color: "#fff" }}>
-          Register
+
+        {error && <p style={{ color: "red", marginBottom: 8 }}>{error}</p>}
+
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            width: "100%",
+            padding: 10,
+            background: loading ? "#999" : "#27548A",
+            color: "#fff",
+            cursor: loading ? "not-allowed" : "pointer",
+            border: "none"
+          }}
+        >
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
