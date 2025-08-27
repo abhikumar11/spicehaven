@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../redux/action";
+import { registerUser } from "../redux/action/userAction";
 const Register = () => {
   const [frmData, setFrmData] = useState({});
   const dispatch = useDispatch();

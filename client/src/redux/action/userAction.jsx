@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AUTH_FAIL, AUTH_REQUEST, AUTH_SUCCESS, LOGOUT } from "./constant";
+import { AUTH_FAIL, AUTH_REQUEST, AUTH_SUCCESS, LOGOUT } from "../constant";
 import { toast } from "react-toastify";
 export const loginUser = (frmData) => async (dispatch) => {
     try {

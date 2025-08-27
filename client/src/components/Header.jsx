@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../redux/action';
+import { Link } from "react-router-dom";
+import { logout } from "../redux/action/userAction";
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
