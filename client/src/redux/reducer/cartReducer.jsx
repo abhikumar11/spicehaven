@@ -1,4 +1,4 @@
-import { ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART } from "../constant";
+import { ADD_TO_CART, CLEAR_CART, DECREASE_QTY, INCREASE_QTY, REMOVE_FROM_CART } from "../constant";
 
 const initialState = {
   cartItems: [],
@@ -8,12 +8,12 @@ const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART: {
       const item = action.payload;
-      const exists = state.cartItems.find((i) => i.id === item.id);
+      const exists = state.cartItems.find((i) => i._id === item._id);
       if (exists) {
         return {
           ...state,
           items: state.cartItems.map((i) =>
-            i.id === item.id
+            i._id === item._id
               ? { ...i, quantity: i.quantity + 1 }
               : i
           ),
@@ -33,10 +33,27 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          (i) => i.id !== action.payload
+          (i) => i._id !== action.payload
         ),
       };
-
+    case INCREASE_QTY:
+      {
+        const item = action.payload;
+        return {
+          ...state, cartItems: state.cartItems.map((pro) => pro._id === item._id ? { ...pro, quantity: pro.quantity + 1 } : pro)
+        }
+      };
+    case DECREASE_QTY: {
+      const item = action.payload;
+      return {
+        ...state,
+        cartItems: state.cartItems
+          .map((i) =>
+            i._id === item._id ? { ...i, quantity: i.quantity - 1 } : i
+          )
+          .filter((i) => i.quantity > 0),
+      };
+    }
     case CLEAR_CART:
       return initialState;
 
