@@ -9,16 +9,16 @@ export const addToCart=(item)=>(dispatch)=>{
                   toast.error("Unable to add to cart");
     }
 }
-export const increaseQty=(item)=>(dispatch)=>{
+export const increaseQty=(itemid)=>(dispatch)=>{
   try {
-        dispatch({type:INCREASE_QTY,payload:item});
+        dispatch({type:INCREASE_QTY,payload:itemid});
   } catch (err) {
     toast.error("Unable to increase qty");
   }
 }
-export const decreaseQty=(item)=>(dispatch)=>{
+export const decreaseQty=(itemid)=>(dispatch)=>{
   try {
-        dispatch({type:DECREASE_QTY,payload:item});
+        dispatch({type:DECREASE_QTY,payload:itemid});
   } catch (err) {
     toast.error("Unable to decrease qty");
   }

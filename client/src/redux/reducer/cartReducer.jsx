@@ -38,18 +38,18 @@ const cartReducer = (state = initialState, action) => {
       };
     case INCREASE_QTY:
       {
-        const item = action.payload;
+        const itemid= action.payload;
         return {
-          ...state, cartItems: state.cartItems.map((pro) => pro._id === item._id ? { ...pro, quantity: pro.quantity + 1 } : pro)
+          ...state, cartItems: state.cartItems.map((pro) => pro._id === itemid ? { ...pro, quantity: pro.quantity + 1 } : pro)
         }
       };
     case DECREASE_QTY: {
-      const item = action.payload;
+      const itemid = action.payload;
       return {
         ...state,
         cartItems: state.cartItems
           .map((i) =>
-            i._id === item._id ? { ...i, quantity: i.quantity - 1 } : i
+            i._id === itemid ? { ...i, quantity: i.quantity - 1 } : i
           )
           .filter((i) => i.quantity > 0),
       };
