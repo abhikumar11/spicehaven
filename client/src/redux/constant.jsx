@@ -6,6 +6,8 @@ export const LOGOUT="LOGOUT";
 export const ADD_TO_CART="ADD_TO_CART";
 export const REMOVE_FROM_CART="REMOVE_FROM_CART";
 export const CLEAR_CART="CLEAR_CART";
+export const INCREASE_QTY="INCREASE_QTY";
+export const DECREASE_QTY="DECREASE_QTY";
 
 export const FETCH_PRO_REQUEST="FETCH_PRO_REQUEST";
 export const FETCH_PRO_SUCCESS="FETCH_PRO_SUCCESS";
