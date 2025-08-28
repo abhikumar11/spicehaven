@@ -1,8 +1,4 @@
-import {
-     FETCH_PRO_FAIL,
-     FETCH_PRO_REQUEST,
-     FETCH_PRO_SUCCESS,
-} from "../constant";
+import {FETCH_PRO_FAIL,FETCH_PRO_REQUEST,FETCH_PRO_SUCCESS} from "../constant";
 
 const initialState = {
      loading: false,
