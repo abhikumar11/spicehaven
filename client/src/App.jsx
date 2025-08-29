@@ -4,6 +4,7 @@ import Layout from './components/Layout'
 import Home from './components/Home'
 import Register from './components/Register'
 import Cart from './components/Cart'
+import Checkout from './components/Checkout'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/cart" element={<Cart/>}/>
+        <Route path="/checkout" element={<Checkout />} />
         </Route>
         </Routes>
     </div>

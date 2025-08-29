@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { INCREASE_QTY, DECREASE_QTY, REMOVE_FROM_CART, CLEAR_CART } from "../redux/constant";
 import { decreaseQty, increaseQty } from "../redux/action/cartAction";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -77,9 +78,11 @@ const Cart = () => {
           >
             Clear Cart
           </button>
-          <button className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-            Checkout
-          </button>
+         <Link to="/checkout">
+  <button className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+    Checkout
+  </button>
+</Link>
         </div>
       </div>
     </div>
