@@ -33,10 +33,10 @@ module.exports.createOrder = async (req, res) => {
       deliveryAddress
     });
     await newOrder.save();
-    res.status(200).json({ message: "Order created successfully!", order: newOrder });
+    res.status(200).json({message:"Order created successfully!",order:newOrder});
 
   } catch (err) {
     console.error("Order creation error:", err);
-    res.status(500).json({ message: "Something went wrong while creating the order" });
+    res.status(500).json({message:"Something went wrong while creating the order"});
   }
 };
